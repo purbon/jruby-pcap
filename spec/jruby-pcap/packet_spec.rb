@@ -14,6 +14,7 @@ describe Jruby::Pcap do
     end
 
   end
+
   context "when fetching the ipv4 frame" do
 
     subject(:frame) { packet.ipv4 }
@@ -24,6 +25,16 @@ describe Jruby::Pcap do
 
     it "get the src_host attribute" do
       expect(frame.src_host).to eq("192.168.122.84")
+    end
+  end
+
+  describe "handling live packets" do
+
+    let(:handle) { Jruby::Pcap.live("en0") }
+    let(:now)    { Time.now.to_i }
+
+    it "able to get a packet timestamp" do
+      expect(packet.timestamp).to be > now
     end
 
   end

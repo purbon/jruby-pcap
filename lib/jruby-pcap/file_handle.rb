@@ -2,7 +2,7 @@ require "jruby-pcap/packet"
 java_import java.sql.Timestamp
 
 module Jruby::Pcap
-  class Handle
+  class FileHandle
 
     include Enumerable
     attr_reader :handle
