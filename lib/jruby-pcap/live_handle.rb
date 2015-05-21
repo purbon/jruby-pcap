@@ -13,9 +13,7 @@ module Jruby::Pcap
     def each
       handle = @interface.open_live(1024, PcapNetworkInterface::PromiscuousMode::PROMISCUOUS, 0)
       while true do
-        puts "start"
         next_packet = handle.next_packet_ex
-        puts "next_packet"
         if next_packet
           yield Packet.new(next_packet, handle)
         else

@@ -13,7 +13,26 @@ module Jruby::Pcap
     end
 
     def ipv4
-      Frame.new(@handle, @packet.get(IpV4Packet))
+      dataset = @packet.get(IpV4Packet)
+      Frame.new( @handle, dataset ) if dataset
+    end
+
+    def udp
+      dataset = @packet.get(UdpPacket)
+      Frame.new( @handle, dataset ) if dataset
+    end
+
+    def tcp
+      dataset = @packet.get(TcpPacket)
+      Frame.new( @handle, dataset ) if dataset
+    end
+
+    def to_hash
+      hash  = {}
+      hash.merge!(ipv4.to_hash) if ipv4
+      hash.merge!(tcp.to_hash)  if tcp
+      hash.merge!(udp.to_hash)  if udp
+      hash
     end
 
     def to_s
