@@ -54,12 +54,10 @@ module Jruby::Pcap
     def to_hash
       hash = {}
       if (@frame.is_a?(IpV4Packet))
-        hash['src_addr'] = src_addr
-        hash['src_host'] = src_host
-        hash['dst_addr'] = dst_addr
-        hash['dst_host'] = dst_host
-        host['procotol'] = protocol
-        host['version'] = version
+        hash['src_addr']  = src_addr
+        hash['dst_addr']  = dst_addr
+        hash['procotol']  = protocol
+        hash['version']   = version
         hash['ip_length'] = length
       elsif (@frame.is_a?(TcpPacket) || @frame.is_a?(UdpPacket))
         hash['src_port'] = src_port
